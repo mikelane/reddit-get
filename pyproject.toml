@@ -1,14 +1,25 @@
 [tool.poetry]
 name = 'reddit-get'
-version = '0.0.2-alpha1'
+version = '0.0.3'
 description = 'A CLI to get reddit content'
 authors = ['Michael Lane <mikelane@gmail.com>']
+license = 'MIT'
+readme = 'README.md'
+homepage = 'https://github.com/mikelane/reddit-get'
+repository = 'https://github.com/mikelane/reddit-get'
+keywords = ['reddit', 'cli']
+classifiers = [
+    'Environment :: Console',
+]
+include = [
+    'LICENSE',
+]
 
 [tool.poetry.scripts]
 reddit-get = 'reddit_get.cli:main'
 
 [tool.poetry.dependencies]
-python = '^3.9.1'
+python = '^3.8'
 fire = '^0.3.1'
 praw = "^7.1.0"
 toml = '^0.10.2'

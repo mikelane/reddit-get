@@ -485,8 +485,8 @@ six = "*"
 
 [metadata]
 lock-version = "1.1"
-python-versions = '^3.9.1'
-content-hash = "441a680fb13c493fcd6a4c484faaedfc494130d68b12d35ec58f968da806be62"
+python-versions = '^3.8'
+content-hash = "3a607b5be0425a9028b93b291a1702cfc99f08cc7d53e8a93af4369c66ec1826"
 
 [metadata.files]
 apipkg = [
