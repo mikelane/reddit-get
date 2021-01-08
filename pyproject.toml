@@ -1,0 +1,58 @@
+[tool.poetry]
+name = 'reddit-get'
+version = '0.0.2-alpha1'
+description = 'A CLI to get reddit content'
+authors = ['Michael Lane <mikelane@gmail.com>']
+
+[tool.poetry.scripts]
+reddit-get = 'reddit_get.cli:main'
+
+[tool.poetry.dependencies]
+python = '^3.9.1'
+fire = '^0.3.1'
+praw = "^7.1.0"
+toml = '^0.10.2'
+
+[tool.poetry.dev-dependencies]
+black = '*'
+mypy = '*'
+pytest = '*'
+pytest-console-scripts = '*'
+pytest-cov = '*'
+pytest-mock = '*'
+pytest-picked = '*'
+pytest-sugar = '*'
+pytest-xdist = '*'
+
+[tool.pytest.ini_options]
+minversion = '6.0'
+addopts = '-ra -vvv'
+testpaths = ['tests']
+python_functions = ['test_*', 'it_*']
+
+[tool.black]
+line-length = 110
+skip-string-normalization = true
+include = '.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
+
+[build-system]
+requires = ['poetry-core>=1.0.0']
+build-backend = 'poetry.core.masonry.api'
