@@ -8,59 +8,6 @@ import pytest
 from reddit_get import RedditCli
 
 
-class MockRedditor:
-    def me(self):
-        return 'Mocked Redditor'
-
-
-class MockSubmission:
-    def __init__(self, title):
-        self.title = title
-
-    def __repr__(self):
-        return self.title
-
-
-class MockSubreddit:
-    def __init__(self, display_name: str, *args, **kwargs):
-        self.display_name = display_name
-
-    def __repr__(self):
-        return self.display_name
-
-    def controversial(self, *args, **kwargs):
-        return [MockSubmission('controversial') for _ in range(kwargs['limit'])]
-
-    def gilded(self, *args, **kwargs):
-        return [MockSubmission('gilded') for _ in range(kwargs['limit'])]
-
-    def hot(self, *args, **kwargs):
-        return [MockSubmission('hot') for _ in range(kwargs['limit'])]
-
-    def new(self, *args, **kwargs):
-        return [MockSubmission('new') for _ in range(kwargs['limit'])]
-
-    def random_rising(self, *args, **kwargs):
-        return [MockSubmission('random_rising') for _ in range(kwargs['limit'])]
-
-    def rising(self, *args, **kwargs):
-        return [MockSubmission('rising') for _ in range(kwargs['limit'])]
-
-    def top(self, *args, **kwargs):
-        return [MockSubmission('top') for _ in range(kwargs['limit'])]
-
-
-class MockReddit:
-    def __init__(self, *args, **kwargs):
-        self.user = MockRedditor()
-        self.subreddit = MockSubreddit
-
-
-@pytest.fixture()
-def mock_reddit(monkeypatch):
-    monkeypatch.setattr(praw, 'Reddit', MockReddit)
-
-
 # noinspection PyMethodMayBeStatic
 class TestRedditCli:
     def it_sets_up_the_configs(self, mock_reddit):
@@ -88,12 +35,59 @@ class TestRedditCli:
             cli.config_path = None
             cli.config_location()
 
+    def it_rejects_invalid_post_sorting_values(self, mock_reddit):
+        with pytest.raises(fire.core.FireError):
+            cli = RedditCli('tests/.exampleconfig')
+            cli.post(subreddit='testsubreddit', post_sorting='invalid')
+
+    def it_rejects_invalid_time_filter_values(self, mock_reddit):
+        with pytest.raises(fire.core.FireError):
+            cli = RedditCli('tests/.exampleconfig')
+            cli.post(subreddit='testsubreddit', time_filter='invalid')
+
+    def it_rejects_invalid_post_limit(self, mock_reddit):
+        with pytest.raises(fire.core.FireError):
+            cli = RedditCli('tests/.exampleconfig')
+            cli.post(subreddit='testsubreddit', limit=0)
+
     def it_gets_three_controversial_posts(self, mock_reddit):
         cli = RedditCli('tests/.exampleconfig')
         result = cli.post(subreddit='testsubreddit', post_sorting='controversial', limit=3)
-        expected = ['##### *Controversial Posts from r/testsubreddit'] + ['- *controversial*'] * 3
+        expected = ['##### *Controversial Posts from r/testsubreddit*'] + ['- *controversial*'] * 3
+        assert result == expected
 
     def it_gets_three_gilded_posts(self, mock_reddit):
         cli = RedditCli('tests/.exampleconfig')
         result = cli.post(subreddit='testsubreddit', post_sorting='gilded', limit=3)
-        expected = ['##### *Controversial Posts from r/testsubreddit'] + ['- *controversial*'] * 3
+        expected = ['##### *Gilded Posts from r/testsubreddit*'] + ['- *gilded*'] * 3
+        assert result == expected
+
+    def it_gets_hot_posts(self, mock_reddit):
+        cli = RedditCli('tests/.exampleconfig')
+        result = cli.post(subreddit='testsubreddit', post_sorting='hot', limit=3)
+        expected = ['##### *Hot Posts from r/testsubreddit*'] + ['- *hot*'] * 3
+        assert result == expected
+
+    def it_gets_new_posts(self, mock_reddit):
+        cli = RedditCli('tests/.exampleconfig')
+        result = cli.post(subreddit='testsubreddit', post_sorting='new', limit=3)
+        expected = ['##### *New Posts from r/testsubreddit*'] + ['- *new*'] * 3
+        assert result == expected
+
+    def it_gets_random_rising_posts(self, mock_reddit):
+        cli = RedditCli('tests/.exampleconfig')
+        result = cli.post(subreddit='testsubreddit', post_sorting='random_rising', limit=3)
+        expected = ['##### *Random_Rising Posts from r/testsubreddit*'] + ['- *random_rising*'] * 3
+        assert result == expected
+
+    def it_gets_rising_posts(self, mock_reddit):
+        cli = RedditCli('tests/.exampleconfig')
+        result = cli.post(subreddit='testsubreddit', post_sorting='rising', limit=3)
+        expected = ['##### *Rising Posts from r/testsubreddit*'] + ['- *rising*'] * 3
+        assert result == expected
+
+    def it_gets_top_posts(self, mock_reddit):
+        cli = RedditCli('tests/.exampleconfig')
+        result = cli.post(subreddit='testsubreddit', post_sorting='top', limit=3)
+        expected = ['##### *Top Posts from r/testsubreddit*'] + ['- *top*'] * 3
+        assert result == expected

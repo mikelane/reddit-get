@@ -16,7 +16,7 @@ class SortingOption(Enum):
     GILDED = 'gilded'
     HOT = 'hot'
     NEW = 'new'
-    RANDOM_RISING = 'randomo_rising'
+    RANDOM_RISING = 'random_rising'
     RISING = 'rising'
     TOP = 'top'
 
@@ -75,7 +75,7 @@ class RedditCli:
             raise fire.core.FireError(f'{post_sorting} is not a valid sorting option.')
         if time_filter not in self.valid_subreddit_time_filter_values:
             raise fire.core.FireError(f'{time_filter} is not a valid time filter option')
-        if not 0 < limit < 25:
+        if not 0 < limit <= 25:
             raise fire.core.FireError('You may only get between 1 and 25 submissions')
 
         subreddit: Subreddit = self.reddit.subreddit(subreddit)
@@ -94,13 +94,10 @@ class RedditCli:
             [f'{"#####" * markdown} *{post_sorting.title()} Posts from r/{subreddit}*'] if header else []
         )
 
-        try:
-            return response_header + [
-                f'{_wrap_title(item.title, markdown)}'
-                for item in call_map[SortingOption[post_sorting.upper()]](limit=limit)
-            ]
-        except TypeError as e:
-            raise fire.core.FireError(f'Invalid submission sorting choice, {e}')
+        return response_header + [
+            f'{_wrap_title(item.title, markdown)}'
+            for item in call_map[SortingOption[post_sorting.upper()]](limit=limit)
+        ]
 
 
 def main():
