@@ -20,6 +20,7 @@ class MockRedditor:
 class MockSubmission:
     def __init__(self, title):
         self.title = title
+        self.author = 'testauthor'
 
 
 # noinspection PyUnusedLocal
