@@ -49,14 +49,4 @@ jobs:
       - name: Install Poetry Dependencies
         run: poetry install -vvv --remove-untracked
       - name: Run Pytest with Black, isort, and coverage
-        run: poetry run pytest -vvv \
-          --black \
-          --isort \
-          --force-sugar \
-          --tb=native \
-          --cov=reddit_get \
-          --cov-fail-under=90 \
-          --numprocesses=auto \
-          --color=yes \
-          --code-highlight=yes \
-          --durations=10
+        run: poetry run pytest -vvv --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --numprocesses=auto --color=yes --code-highlight=yes --durations=10
