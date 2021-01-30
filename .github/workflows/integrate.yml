@@ -47,6 +47,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-poetry-
       - name: Install Poetry Dependencies
-        run: poetry install -vvv --remove-untracked
+        run: poetry install -vvv
       - name: Run Pytest with Black, isort, and coverage
         run: poetry run pytest -vvv --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --numprocesses=auto --color=yes --code-highlight=yes --durations=10
