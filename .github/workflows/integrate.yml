@@ -49,4 +49,6 @@ jobs:
       - name: Install Poetry Dependencies
         run: poetry install -vvv
       - name: Run Pytest with Black, isort, and coverage
-        run: poetry run pytest -vvv --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --numprocesses=auto --color=yes --code-highlight=yes --durations=10
+        run: poetry run pytest -vvv --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --numprocesses=auto --color=yes --code-highlight=yes --durations=10 > pytest-coverage.txt
+      - name: Comment coverage
+        uses: coroo/pytest-coverage-commentator@v1.0.2
