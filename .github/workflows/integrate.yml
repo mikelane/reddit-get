@@ -1,6 +1,8 @@
 name: Reddit-Get Continuous Integration
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -49,6 +51,12 @@ jobs:
       - name: Install Poetry Dependencies
         run: poetry install -vvv
       - name: Run Pytest with Black, isort, and coverage
-        run: poetry run pytest -vvv --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --numprocesses=auto --color=yes --code-highlight=yes --durations=10 > pytest-coverage.txt
-      - name: Comment Coverage
-        uses: coroo/pytest-coverage-commentator@v1.0.2
+        run: poetry run pytest -vvv --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --cov-report=xml:docs/coverage/report.xml --numprocesses=auto --color=yes --code-highlight=yes --durations=10
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          path_to_write_report: ./docs/coverage/report.xml
+          verbose: true
