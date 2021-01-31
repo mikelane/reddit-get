@@ -58,5 +58,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: codecov-umbrella
           fail_ci_if_error: true
-          path_to_write_report: .docs/coverage/$GITHUB_WORKFLOW-$GITHUB_SHA-report.xml
+          path_to_write_report: ".docs/coverage/$GITHUB_WORKFLOW-$GITHUB_SHA-report.xml"
           verbose: true
