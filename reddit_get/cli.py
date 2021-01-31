@@ -2,7 +2,7 @@ import functools
 import sys
 from pathlib import Path
 from string import Formatter
-from typing import Any, Callable, Dict, Iterator, List, Optional, Set
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Set, Union
 
 import fire
 import praw
@@ -10,7 +10,6 @@ import toml
 from praw.exceptions import MissingRequiredAttributeException
 from praw.models import Submission
 from praw.models.reddit.subreddit import Subreddit
-from titlecase import titlecase
 
 from reddit_get.types import SortingOption, TimeFilterOption
 
@@ -52,7 +51,7 @@ class RedditCli:
             raise fire.core.FireError(  # pragma: no cover
                 'Failed to authenticate with Reddit. Did you remember your username and password?'
             )
-        self.valid_header_variables: Dict[str, Dict[Optional[SortingOption, TimeFilterOption], str]] = {
+        self.valid_header_variables: Dict[str, Dict[Union[SortingOption, TimeFilterOption], str]] = {
             'sorting': {
                 SortingOption.CONTROVERSIAL: 'Most Controversial',
                 SortingOption.GILDED: 'Most Awarded',
@@ -87,7 +86,7 @@ class RedditCli:
     ) -> str:
         valid_keys = {'sorting', 'time', 'subreddit'}
         keys = self._get_template_keys(template)
-        if not keys.issubset(valid_keys):
+        if keys and not keys.issubset(valid_keys):
             raise fire.core.FireError(
                 f'Invalid keys passed into header template: {", ".join(keys - valid_keys)}'
             )
@@ -100,6 +99,8 @@ class RedditCli:
 
     def _create_post_output(self, template: str, posts: Iterator[Submission]) -> List[str]:
         template_vars = self._get_template_keys(template)
+        if not template_vars:
+            raise fire.core.FireError('Your post output template did not have any items to be printed')
         results = []
         for post in posts:
             try:
@@ -110,9 +111,9 @@ class RedditCli:
         return results
 
     @staticmethod
-    def _get_template_keys(template: str) -> Set[str]:
-        template_vars = {tup[1] for tup in Formatter().parse(template) if tup[1]}
-        return template_vars
+    def _get_template_keys(template: str) -> Optional[Set[str]]:
+        template_vars = {tup[1] for tup in Formatter().parse(template) if tup[1] and isinstance(tup[1], str)}
+        return template_vars or None
 
     def post(
         self,
@@ -212,7 +213,7 @@ class RedditCli:
             else []
         )
 
-        posts: List[str] = self._create_post_output(output_format, call_map[post_sorting](limit=limit))
+        posts: List[str] = self._create_post_output(output_format, call_map[post_sorting](limit=limit))  # type: ignore
 
         return response_header + posts
 
