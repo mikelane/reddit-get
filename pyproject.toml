@@ -27,9 +27,9 @@ titlecase = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 black = { version = '*', allow-prereleases = true }
-mypy = '*'
+mypy = { version = '*', allow-prereleases = true }
 pytest = '*'
-pytest-black = '*'
+pytest-black = { version = '*', allow-prereleases = true }
 pytest-console-scripts = '*'
 pytest-cov = '*'
 pytest-mock = '*'
@@ -40,6 +40,8 @@ tox = "*"
 tox-pyenv = "*"
 isort = "*"
 pytest-isort = "*"
+pydantic = "^1.7.3"
+pytest-mypy = {version = "*", allow-prereleases = true}
 
 [tool.pytest.ini_options]
 minversion = '6.0'
@@ -65,8 +67,6 @@ exclude = '''
     | build
     | dist
   )/
-  | foo.py           # also separately exclude a file named foo.py in
-                     # the root of the project
 )
 '''
 

@@ -178,3 +178,14 @@ class TestRedditCli:
                             limit=3,
                             output_format='{invalid}',
                         )
+
+                def it_raises_fire_error_for_template_with_no_keys(self):
+                    with pytest.raises(fire.core.FireError):
+
+                        cli = RedditCli('tests/.exampleconfig')
+                        result = cli.post(
+                            subreddit='testsubreddit',
+                            post_sorting='top',
+                            limit=3,
+                            output_format='Nothing here',
+                        )
