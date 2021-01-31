@@ -1,5 +1,6 @@
 # Reddit Get
 ![Continuous Integration](https://github.com/mikelane/reddit-get/workflows/Reddit-Get%20Continuous%20Integration/badge.svg)
+[![codecov](https://codecov.io/gh/mikelane/reddit-get/branch/main/graph/badge.svg)](https://codecov.io/gh/mikelane/reddit-get)
 
 This is a python CLI that will pull posts from Reddit. In order to use this CLI, you'll need to set up a 
 Reddit app of your own so that you can authenticate into Reddit with your own credentials. Never fear, 
