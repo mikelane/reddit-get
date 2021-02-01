@@ -25,22 +25,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Display Python Version
         run: |
           python --version
           pip --version
+
       - name: Update pip, setuptools, and wheel
         run: pip install -U pip setuptools wheel
+
       - name: Setup Poetry
         uses: Gr1N/setup-poetry@v4
         with:
           poetry-preview: true
+
       - name: Display Poetry Version
         run: poetry --version
+
       - name: Cache Dependencies
         uses: actions/cache@v1
         with:
@@ -48,14 +54,17 @@ jobs:
           key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-poetry-
+
       - name: Install Poetry Dependencies
         run: poetry install -vvv
+
       - name: Run Pytest with Black, isort, and coverage
-        run: poetry run pytest -vvv --mypy --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --cov-report=xml:docs/coverage/report.xml --numprocesses=auto --color=yes --code-highlight=yes --durations=10
+        run: poetry run pytest -vvv --mypy --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --cov-report=xml:docs/coverage/integration/report.xml --numprocesses=auto --color=yes --code-highlight=yes --durations=10
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: codecov-umbrella
           fail_ci_if_error: true
-          path_to_write_report: .docs/coverage/report.xml
+          path_to_write_report: .docs/coverage/integration/report.xml
