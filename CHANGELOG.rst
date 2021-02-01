@@ -4,12 +4,22 @@ Changelog
 
 (unreleased)
 ------------
-- Update version to 1.0.2. [Michael Lane]
-- Fix deployment coverage report location. [Michael Lane]
-- Fix coverage report location. [Michael Lane]
-- Fix coverage report location. [Michael Lane]
-- Add a deploy workflow and clean up integration workflow. [Michael
+- Add a deploy workflow and clean up integration workflow (#7) [Mike
   Lane]
+
+  * Add a deploy workflow and clean up integration workflow
+
+  * Fix coverage report location
+
+  * Fix coverage report location
+
+  * Fix deployment coverage report location
+
+  * update version to 1.0.2
+
+  * Add CHANGELOG and update deploy script
+
+  * Fix name of pypi token secret
 - Bump fire from 0.3.1 to 0.4.0 (#6) [dependabot[bot]]
 
   Bumps [fire](https://github.com/google/python-fire) from 0.3.1 to 0.4.0.

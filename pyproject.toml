@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'reddit-get'
-version = "1.0.2"
+version = "1.0.3"
 description = 'A CLI to get reddit content'
 authors = ['Michael Lane <mikelane@gmail.com>']
 license = 'MIT'
