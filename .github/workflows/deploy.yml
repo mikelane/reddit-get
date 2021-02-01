@@ -1,0 +1,59 @@
+name: Reddit-Get Deployment
+
+on:
+  release:
+    branches: [ main ]
+
+jobs:
+  test_build_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.x
+
+      - name: Display Python Version
+        run: |
+          python --version
+          pip --version
+
+      - name: Udate pip, setuptools, and wheel
+        run: pip install -U pip setuptools wheel
+
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v4
+        with:
+          poetry-preview: true
+
+      - name: Display Poetry Version
+        run: poetry --version
+
+      - name: Install Poetry Dependencies
+        run: poetry install -vvv
+
+      - name: Run pytest
+        run: poetry run pytest -vvv --mypy --black --isort --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --cov-report=xml:docs/coverage/report.xml --numprocesses=auto --color=yes --code-highlight=yes --durations=10
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          path_to_write_report: .docs/coverage/release-report.xml
+
+      - name: Build Wheel
+        run: poetry build -vvv
+
+      - name: Configure Poetry for PyPI
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          poetry config pypi-token.pypi $PYPI_TOKEN
+
+      - name: Deploy to PyPI
+        run: poetry publish
