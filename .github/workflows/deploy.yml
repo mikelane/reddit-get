@@ -7,6 +7,8 @@ on:
 jobs:
   test_build_deploy:
     runs-on: ubuntu-latest
+    env:
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -50,8 +52,6 @@ jobs:
         run: poetry build -vvv
 
       - name: Configure Poetry for PyPI
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           poetry config pypi-token.pypi $PYPI_TOKEN
 
