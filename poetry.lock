@@ -284,7 +284,7 @@ dev = ["pre-commit", "tox"]
 
 [[package]]
 name = "praw"
-version = "7.1.2"
+version = "7.1.4"
 description = "PRAW, an acronym for `Python Reddit API Wrapper`, is a python package that allows for simple access to reddit's API."
 category = "main"
 optional = false
@@ -297,7 +297,7 @@ websocket-client = ">=0.54.0"
 
 [package.extras]
 ci = ["coveralls"]
-dev = ["pre-commit", "black", "flake8", "flynt", "isort", "pydocstyle", "sphinx (<3.0)", "sphinx-rtd-theme", "betamax (>=0.8,<0.9)", "betamax-matchers (>=0.3.0,<0.5)", "pytest (>=2.7.3)"]
+dev = ["packaging", "pre-commit", "black", "flake8", "flynt", "isort", "pydocstyle", "sphinx (<3.0)", "sphinx-rtd-theme", "betamax (>=0.8,<0.9)", "betamax-matchers (>=0.3.0,<0.5)", "pytest (>=2.7.3)"]
 lint = ["black", "flake8", "flynt", "isort", "pydocstyle", "sphinx (<3.0)", "sphinx-rtd-theme"]
 readthedocs = ["sphinx (<3.0)"]
 test = ["betamax (>=0.8,<0.9)", "betamax-matchers (>=0.3.0,<0.5)", "pytest (>=2.7.3)"]
@@ -871,8 +871,8 @@ pluggy = [
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
 ]
 praw = [
-    {file = "praw-7.1.2-py3-none-any.whl", hash = "sha256:dec043a08e1ea229d4f64407b16defeaa63c1eca133e631f47842019d0d84071"},
-    {file = "praw-7.1.2.tar.gz", hash = "sha256:3deaa094d510b6b03358c7b6a36c37e314b77d8750efdf97a770c175886c4444"},
+    {file = "praw-7.1.4-py3-none-any.whl", hash = "sha256:068a01c19834e1f748a8c220c6aa62ae9f0f8e211504ab8ef19883d09bed3430"},
+    {file = "praw-7.1.4.tar.gz", hash = "sha256:87166a77ec31a1d9686ccdac97b5b72ba277ce436976eb3baf467c593f15bb26"},
 ]
 prawcore = [
     {file = "prawcore-1.5.0-py3-none-any.whl", hash = "sha256:672d8a2faa12b44307874b2acfdd27f9cbaa5fa37bada4b34e36277224e6d8ed"},
