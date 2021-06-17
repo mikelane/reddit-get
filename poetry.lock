@@ -519,7 +519,7 @@ testing = ["filelock"]
 name = "regex"
 version = "2020.11.13"
 description = "Alternative regular expression module, to replace re."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -559,14 +559,15 @@ python-versions = "*"
 
 [[package]]
 name = "titlecase"
-version = "2.0.0"
+version = "2.2.0"
 description = "Python Port of John Gruber's titlecase.pl"
 category = "main"
 optional = false
 python-versions = "*"
 
-[package.dependencies]
-regex = ">=2020.4.4"
+[package.extras]
+regex = ["regex (>=2020.4.4)"]
+test = ["nose (>=1.0)"]
 
 [[package]]
 name = "toml"
@@ -1012,7 +1013,7 @@ termcolor = [
     {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
 ]
 titlecase = [
-    {file = "titlecase-2.0.0.tar.gz", hash = "sha256:d6b24c4bfce6b05ee55da48901a1aa39eac20f223160b7872dcf1b8182214bec"},
+    {file = "titlecase-2.2.0.tar.gz", hash = "sha256:5d97ee51da37fb57c8753b79efa8edfdf3f10c0060de926efee970081e28d52f"},
 ]
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
