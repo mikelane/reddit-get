@@ -40,7 +40,7 @@ tox = "*"
 tox-pyenv = "*"
 isort = "*"
 pytest-isort = "*"
-pydantic = "^1.7.3"
+pydantic = "^1.7.4"
 pytest-mypy = {version = "*", allow-prereleases = true}
 
 [tool.pytest.ini_options]
