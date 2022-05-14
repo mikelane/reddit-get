@@ -4,6 +4,7 @@ Changelog
 
 (unreleased)
 ------------
+- Update dependencies and drop python3.6 support. [Mike Lane]
 - Bump titlecase from 2.0.0 to 2.3 (#35) [dependabot[bot]]
 
   Bumps [titlecase](https://github.com/ppannuto/python-titlecase) from 2.0.0 to 2.3.
