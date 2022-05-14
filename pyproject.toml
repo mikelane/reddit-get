@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'reddit-get'
-version = "1.0.3"
+version = "1.0.5"
 description = 'A CLI to get reddit content'
 authors = ['Michael Lane <mikelane@gmail.com>']
 license = 'MIT'
@@ -19,11 +19,11 @@ include = [
 reddit-get = 'reddit_get.cli:main'
 
 [tool.poetry.dependencies]
-python = '^3.6'
+python = '>=3.7.0, <4.0.0'
 fire = '>=0.3.1,<0.5.0'
-praw = "^7.1.0"
+praw = "^7.6.0"
 toml = '^0.10.2'
-titlecase = "^2.0.0"
+titlecase = "^2.3.0"
 
 [tool.poetry.dev-dependencies]
 black = { version = '*', allow-prereleases = true }
@@ -40,7 +40,7 @@ tox = "*"
 tox-pyenv = "*"
 isort = "*"
 pytest-isort = "*"
-pydantic = "^1.7.4"
+pydantic = "^1.9.0"
 pytest-mypy = {version = "*", allow-prereleases = true}
 
 [tool.pytest.ini_options]

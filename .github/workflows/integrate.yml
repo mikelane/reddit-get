@@ -18,10 +18,10 @@ jobs:
           - macos-latest
           - windows-latest
         python-version:
-          - 3.6.x
           - 3.7.x
           - 3.8.x
           - 3.9.x
+          - 3.10.x
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
