@@ -1,0 +1,4 @@
+[run]
+omit =
+    reddit_get/types/__init__.py
+

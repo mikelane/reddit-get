@@ -1,0 +1,15 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 90%
+        threshold: 5%
+    patch:
+      target: 90%
+      threshold: 5%
+
+ignore:
+  - "reddit_get/__init__.py"
+  - "reddit_get/types/__init__.py"
+  - "tests/"
+

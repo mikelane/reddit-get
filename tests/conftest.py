@@ -29,7 +29,7 @@ class MockSubreddit:
     def __init__(self, display_name: str, *args, **kwargs):
         self.display_name = display_name
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: nocover
         return self.display_name
 
     def controversial(self, *args, **kwargs):

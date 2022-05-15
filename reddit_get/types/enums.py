@@ -1,4 +1,7 @@
-from enum import Enum, EnumMeta
+from enum import (
+    Enum,
+    EnumMeta,
+)
 
 
 class MetaEnum(EnumMeta):
