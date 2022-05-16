@@ -24,6 +24,7 @@ fire = '>=0.3.1,<0.5.0'
 praw = "^7.6.0"
 toml = '^0.10.2'
 titlecase = "^2.3.0"
+typing-extensions = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 black = { version = '*', allow-prereleases = true }
@@ -42,6 +43,7 @@ isort = "*"
 pytest-isort = "*"
 pydantic = "^1.9.0"
 pytest-mypy = {version = "*", allow-prereleases = true}
+types-toml = "^0.10.7"
 
 [tool.pytest.ini_options]
 minversion = '6.0'
@@ -73,6 +75,7 @@ exclude = '''
 [tool.isort]
 profile = "black"
 multi_line_output = 3
+force_grid_wrap = 2
 
 [build-system]
 requires = ['poetry-core>=1.0.0']

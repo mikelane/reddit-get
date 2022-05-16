@@ -1,17 +1,27 @@
-import functools
 import sys
-from pathlib import Path
-from string import Formatter
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Set, Union
+from typing import (
+    Dict,
+    List,
+    Union,
+)
 
 import fire
 import praw
-import toml
 from praw.exceptions import MissingRequiredAttributeException
-from praw.models import Submission
-from praw.models.reddit.subreddit import Subreddit
 
-from reddit_get.types import SortingOption, TimeFilterOption
+from .types import (
+    SortingOption,
+    TimeFilterOption,
+)
+from .utils import (
+    create_post_output,
+    get_post_sorting_option,
+    get_reddit_query_function,
+    get_response,
+    get_template_keys,
+    get_time_filter_option,
+    load_configs,
+)
 
 
 class RedditCli:
@@ -38,19 +48,9 @@ class RedditCli:
     """
 
     def __init__(self, config: str = '~/.redditgetrc'):
-        self.config_path: Path = Path(config).expanduser()
-        try:
-            self.configs = toml.load(self.config_path)
-        except (FileNotFoundError, toml.TomlDecodeError):
-            raise fire.core.FireError(f'No valid TOML config found at {self.config_path}')
-        try:
-            self.reddit = praw.Reddit(**self.configs['reddit-get'])
-        except MissingRequiredAttributeException as e:  # pragma: no cover
-            fire.core.FireError(e)
-        if not self.reddit.user.me():
-            raise fire.core.FireError(  # pragma: no cover
-                'Failed to authenticate with Reddit. Did you remember your username and password?'
-            )
+        self.config_path, self.configs = load_configs(config)
+        self.reddit = self.get_authenticated_reddit_instance()
+
         self.valid_header_variables: Dict[str, Dict[Union[SortingOption, TimeFilterOption], str]] = {
             'sorting': {
                 SortingOption.CONTROVERSIAL: 'Most Controversial',
@@ -71,6 +71,17 @@ class RedditCli:
             },
         }
 
+    def get_authenticated_reddit_instance(self):
+        try:
+            reddit = praw.Reddit(**self.configs['reddit-get'])
+            if not reddit.user.me():
+                raise fire.core.FireError(  # pragma: no cover
+                    'Failed to authenticate with Reddit. Did you remember your username and password?'
+                )
+            return reddit
+        except MissingRequiredAttributeException as e:  # pragma: no cover
+            fire.core.FireError(e)
+
     def config_location(self):
         """Get the path of the reddit-get config.
 
@@ -81,11 +92,11 @@ class RedditCli:
         else:
             raise fire.core.FireError(f'No config_path has been set!')
 
-    def _create_header(
+    def create_header(
         self, template: str, sorting: SortingOption, time: TimeFilterOption, subreddit: str
     ) -> str:
         valid_keys = {'sorting', 'time', 'subreddit'}
-        keys = self._get_template_keys(template)
+        keys = get_template_keys(template)
         if keys and not keys.issubset(valid_keys):
             raise fire.core.FireError(
                 f'Invalid keys passed into header template: {", ".join(keys - valid_keys)}'
@@ -96,24 +107,6 @@ class RedditCli:
             'subreddit': f'r/{subreddit}',
         }
         return template.format(**format_params)
-
-    def _create_post_output(self, template: str, posts: Iterator[Submission]) -> List[str]:
-        template_vars = self._get_template_keys(template)
-        if not template_vars:
-            raise fire.core.FireError('Your post output template did not have any items to be printed')
-        results = []
-        for post in posts:
-            try:
-                format_params = {key: getattr(post, key) for key in template_vars}
-                results.append(template.format(**format_params))
-            except AttributeError as e:
-                raise fire.core.FireError(e)
-        return results
-
-    @staticmethod
-    def _get_template_keys(template: str) -> Optional[Set[str]]:
-        template_vars = {tup[1] for tup in Formatter().parse(template) if tup[1] and isinstance(tup[1], str)}
-        return template_vars or None
 
     def post(
         self,
@@ -178,44 +171,19 @@ class RedditCli:
             The number of post titles from the specified subreddit
             formatted as specified
         """
-        try:
-            post_sorting = SortingOption(post_sorting)
-        except ValueError:
-            raise fire.core.FireError(f'{post_sorting} is not a valid sorting option.')
-        try:
-            time_filter = TimeFilterOption(time_filter)
-        except ValueError:
-            raise fire.core.FireError(f'{time_filter} is not a valid time filter option')
         if not 0 < limit <= 25:
             raise fire.core.FireError('You may only get between 1 and 25 submissions')
-
-        praw_subreddit: Subreddit = self.reddit.subreddit(subreddit)
-
-        call_map: Dict[SortingOption, Callable[[Optional[int]], Iterator[Any]]] = {
-            SortingOption.CONTROVERSIAL: functools.partial(
-                praw_subreddit.controversial, time_filter=time_filter
+        sorting = get_post_sorting_option(post_sorting)
+        query_fn = get_reddit_query_function(self.reddit.subreddit(subreddit), time_filter, sorting)
+        return get_response(
+            self.create_header(
+                template=custom_header,
+                sorting=sorting,
+                time=get_time_filter_option(time_filter),
+                subreddit=subreddit,
             ),
-            SortingOption.GILDED: praw_subreddit.gilded,
-            SortingOption.HOT: praw_subreddit.hot,
-            SortingOption.NEW: praw_subreddit.new,
-            SortingOption.RANDOM_RISING: praw_subreddit.random_rising,
-            SortingOption.RISING: praw_subreddit.rising,
-            SortingOption.TOP: functools.partial(praw_subreddit.top, time_filter=time_filter),
-        }
-
-        response_header = (
-            [
-                self._create_header(
-                    template=custom_header, sorting=post_sorting, time=time_filter, subreddit=subreddit
-                )
-            ]
-            if header
-            else []
+            create_post_output(output_format, query_fn(limit=limit)),
         )
-
-        posts: List[str] = self._create_post_output(output_format, call_map[post_sorting](limit=limit))  # type: ignore
-
-        return response_header + posts
 
 
 def main():  # pragma: no cover
