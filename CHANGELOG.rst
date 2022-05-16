@@ -4,7 +4,21 @@ Changelog
 
 (unreleased)
 ------------
-- Update dependencies and drop python3.6 support. [Mike Lane]
+- Update deploy action (#52) [Mike Lane]
+
+  * Refactor the code
+
+  * Update codecov.yml
+
+  * Update deploy.yml module versions
+- Update codecov settings (#51) [Mike Lane]
+
+  * Refactor the code
+
+  * Update codecov.yml
+- Refactor the code (#50) [Mike Lane]
+- Update CHANGELOG. [Mike Lane]
+- Update dependencies and drop python3.6 support (#49) [Mike Lane]
 - Bump titlecase from 2.0.0 to 2.3 (#35) [dependabot[bot]]
 
   Bumps [titlecase](https://github.com/ppannuto/python-titlecase) from 2.0.0 to 2.3.
