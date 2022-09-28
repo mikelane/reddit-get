@@ -423,11 +423,11 @@ dev = ["pre-commit", "pytest-asyncio", "tox"]
 
 [[package]]
 name = "pytest-mypy"
-version = "0.9.1"
+version = "0.10.0"
 description = "Mypy static type checker plugin for Pytest"
 category = "dev"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 
 [package.dependencies]
 attrs = ">=19.0"
@@ -937,8 +937,8 @@ pytest-mock = [
     {file = "pytest_mock-3.8.2-py3-none-any.whl", hash = "sha256:8a9e226d6c0ef09fcf20c94eb3405c388af438a90f3e39687f84166da82d5948"},
 ]
 pytest-mypy = [
-    {file = "pytest-mypy-0.9.1.tar.gz", hash = "sha256:9ffa3bf405c12c5c6be9e92e22bebb6ab2c91b9c32f45b0f0c93af473269ab5c"},
-    {file = "pytest_mypy-0.9.1-py3-none-any.whl", hash = "sha256:a2505fcf61f1c0c51f950d4623ea8ca2daf6fb2101a5603554bad2e130202083"},
+    {file = "pytest-mypy-0.10.0.tar.gz", hash = "sha256:e74d632685f15a39c31c551a9d8cec4619e24bd396245a6335c5db0ec6d17b6f"},
+    {file = "pytest_mypy-0.10.0-py3-none-any.whl", hash = "sha256:83843dce75a7ce055efb264ff40dad2ecf7abd4e7bd5e5eda015261d11616abb"},
 ]
 pytest-picked = [
     {file = "pytest-picked-0.4.6.tar.gz", hash = "sha256:e1ec7aee5d2cd3a91f676fd0afd7620a26c0ccc21e604152bbc5137f430e6c00"},
