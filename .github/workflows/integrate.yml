@@ -40,7 +40,7 @@ jobs:
         run: pip install -U pip setuptools wheel
 
       - name: Setup Poetry
-        uses: abatilo/actions-poetry@v2.1.6
+        uses: abatilo/actions-poetry@3.7.4
         with:
           poetry-preview: true
 
