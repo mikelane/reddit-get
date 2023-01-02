@@ -41,7 +41,7 @@ tox = "*"
 tox-pyenv = "*"
 isort = "*"
 pytest-isort = "*"
-pydantic = "^1.10.3"
+pydantic = "^1.10.4"
 pytest-mypy = {version = "*", allow-prereleases = true}
 types-toml = "^0.10.8"
 
