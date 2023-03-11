@@ -51,7 +51,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: codecov-umbrella
           fail_ci_if_error: true
-          path_to_write_report: .docs/coverage/deployment/report.xml
 
       - name: Build Wheel
         run: poetry build -vvv
