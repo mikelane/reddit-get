@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'reddit-get'
-version = "1.0.6"
+version = "1.1.0"
 description = 'A CLI to get reddit content'
 authors = ['Michael Lane <mikelane@gmail.com>']
 license = 'MIT'
@@ -37,7 +37,7 @@ pytest-mock = '*'
 pytest-picked = '*'
 pytest-sugar = '*'
 pytest-xdist = '*'
-tox = "*"
+tox = "^3.28.0"
 tox-pyenv = "*"
 isort = "*"
 pytest-isort = "*"

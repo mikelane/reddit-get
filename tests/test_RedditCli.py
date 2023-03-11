@@ -170,7 +170,6 @@ class TestRedditCli:
             class TestCustomPostOutputErrors:
                 def it_raises_fire_error_for_invalid_template_key(self):
                     with pytest.raises(fire.core.FireError):
-
                         cli = RedditCli('tests/.exampleconfig')
                         result = cli.post(
                             subreddit='testsubreddit',
@@ -181,7 +180,6 @@ class TestRedditCli:
 
                 def it_raises_fire_error_for_template_with_no_keys(self):
                     with pytest.raises(fire.core.FireError):
-
                         cli = RedditCli('tests/.exampleconfig')
                         result = cli.post(
                             subreddit='testsubreddit',
