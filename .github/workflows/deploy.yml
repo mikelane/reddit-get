@@ -21,7 +21,7 @@ jobs:
         run: pip install -U pip setuptools wheel
 
       - name: Setup Poetry
-        uses: abatilo/actions-poetry@v2.3.0
+        uses: abatilo/actions-poetry@v2.4.0
         with:
           poetry-preview: true
 
