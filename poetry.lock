@@ -549,17 +549,17 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "praw"
-version = "7.8.0"
+version = "7.8.1"
 description = "Python Reddit API Wrapper."
 optional = false
 python-versions = "~=3.8"
 files = [
-    {file = "praw-7.8.0-py3-none-any.whl", hash = "sha256:66bb2d9dc4f9a35910bf8b4339067c8646ab03270b1c38d77b0487bef8c5c3e2"},
-    {file = "praw-7.8.0.tar.gz", hash = "sha256:910a1478d79ce3892bf35b2c52c90f575d6618dfce248e7bf90eed354c19589c"},
+    {file = "praw-7.8.1-py3-none-any.whl", hash = "sha256:15917a81a06e20ff0aaaf1358481f4588449fa2421233040cb25e5c8202a3e2f"},
+    {file = "praw-7.8.1.tar.gz", hash = "sha256:3c5767909f71e48853eb6335fef7b50a43cbe3da728cdfb16d3be92904b0a4d8"},
 ]
 
 [package.dependencies]
-prawcore = ">=2.1,<3"
+prawcore = ">=2.4,<3"
 update_checker = ">=0.18"
 websocket-client = ">=0.54.0"
 
@@ -572,13 +572,13 @@ test = ["betamax (>=0.8,<0.9)", "betamax-matchers (>=0.3.0,<0.5)", "pytest (>=2.
 
 [[package]]
 name = "prawcore"
-version = "2.3.0"
-description = "Low-level communication layer for PRAW 4+."
+version = "2.4.0"
+description = "\"Low-level communication layer for PRAW 4+."
 optional = false
-python-versions = "~=3.6"
+python-versions = "~=3.8"
 files = [
-    {file = "prawcore-2.3.0-py3-none-any.whl", hash = "sha256:48c17db447fa06a13ca3e722201f443031437708daa736c05a1df895fbcceff5"},
-    {file = "prawcore-2.3.0.tar.gz", hash = "sha256:daf1ccd4b7a80dc4e6567d48336d782e94a9a6dad83770fc2edf76dc9a84f56d"},
+    {file = "prawcore-2.4.0-py3-none-any.whl", hash = "sha256:29af5da58d85704b439ad3c820873ad541f4535e00bb98c66f0fbcc8c603065a"},
+    {file = "prawcore-2.4.0.tar.gz", hash = "sha256:b7b2b5a1d04406e086ab4e79988dc794df16059862f329f4c6a43ed09986c335"},
 ]
 
 [package.dependencies]
@@ -586,9 +586,9 @@ requests = ">=2.6.0,<3.0"
 
 [package.extras]
 ci = ["coveralls"]
-dev = ["betamax (>=0.8,<0.9)", "betamax-matchers (>=0.4.0,<0.5)", "betamax-serializers (>=0.2.0,<0.3)", "black", "flake8", "flynt", "mock (>=0.8)", "pre-commit", "pydocstyle", "pytest", "testfixtures (>4.13.2,<7)"]
-lint = ["black", "flake8", "flynt", "pre-commit", "pydocstyle"]
-test = ["betamax (>=0.8,<0.9)", "betamax-matchers (>=0.4.0,<0.5)", "betamax-serializers (>=0.2.0,<0.3)", "mock (>=0.8)", "pytest", "testfixtures (>4.13.2,<7)"]
+dev = ["packaging", "prawcore[lint]", "prawcore[test]"]
+lint = ["pre-commit", "ruff (>=0.0.291)"]
+test = ["betamax (>=0.8,<0.9)", "pytest (>=2.7.3)", "urllib3 (==1.26.*)"]
 
 [[package]]
 name = "pre-commit"
