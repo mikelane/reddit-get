@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 import fire
@@ -54,7 +56,7 @@ class TestRedditCli:
                 cli = RedditCli('tests/.exampleconfig')
                 result = cli.post(subreddit='testsubreddit', post_sorting='controversial', limit=3)
                 expected = ['#### The Most Controversial Posts for All Time from r/testsubreddit'] + [
-                    '- controversial'
+                    '- controversial',
                 ] * 3
                 assert result == expected
 
@@ -62,7 +64,7 @@ class TestRedditCli:
                 cli = RedditCli('tests/.exampleconfig')
                 result = cli.post(subreddit='testsubreddit', post_sorting='gilded', limit=3)
                 expected = ['#### The Most Awarded Posts for All Time from r/testsubreddit'] + [
-                    '- gilded'
+                    '- gilded',
                 ] * 3
                 assert result == expected
 
@@ -82,7 +84,7 @@ class TestRedditCli:
                 cli = RedditCli('tests/.exampleconfig')
                 result = cli.post(subreddit='testsubreddit', post_sorting='random_rising', limit=3)
                 expected = ['#### The Randomly Selected Rising Posts for All Time from r/testsubreddit'] + [
-                    '- random_rising'
+                    '- random_rising',
                 ] * 3
                 assert result == expected
 
@@ -102,7 +104,7 @@ class TestRedditCli:
             def it_returns_custom_header_with_no_options(self):
                 cli = RedditCli('tests/.exampleconfig')
                 result = cli.post(
-                    subreddit='testsubreddit', post_sorting='top', limit=3, custom_header='Test Header'
+                    subreddit='testsubreddit', post_sorting='top', limit=3, custom_header='Test Header',
                 )
                 expected = ['Test Header'] + ['- top'] * 3
                 assert result == expected
@@ -110,7 +112,7 @@ class TestRedditCli:
             def it_returns_custom_header_with_one_options(self):
                 cli = RedditCli('tests/.exampleconfig')
                 result = cli.post(
-                    subreddit='testsubreddit', post_sorting='top', limit=3, custom_header='Test {sorting}'
+                    subreddit='testsubreddit', post_sorting='top', limit=3, custom_header='Test {sorting}',
                 )
                 expected = ['Test Top'] + ['- top'] * 3
                 assert result == expected
@@ -142,14 +144,14 @@ class TestRedditCli:
                     with pytest.raises(fire.core.FireError):
                         cli = RedditCli('tests/.exampleconfig')
                         result = cli.post(
-                            subreddit='testsubreddit', post_sorting='top', limit=3, custom_header='{invalid}'
+                            subreddit='testsubreddit', post_sorting='top', limit=3, custom_header='{invalid}',
                         )
 
         class TestCustomPostOutput:
             def it_returns_post_output_with_a_single_keyword(self):
                 cli = RedditCli('tests/.exampleconfig')
                 result = cli.post(
-                    subreddit='testsubreddit', post_sorting='top', limit=3, output_format='test {title}'
+                    subreddit='testsubreddit', post_sorting='top', limit=3, output_format='test {title}',
                 )
                 expected = ['#### The Top Posts for All Time from r/testsubreddit'] + ['test top'] * 3
                 assert result == expected
@@ -163,7 +165,7 @@ class TestRedditCli:
                     output_format='test {title} - {author}',
                 )
                 expected = ['#### The Top Posts for All Time from r/testsubreddit'] + [
-                    'test top - testauthor'
+                    'test top - testauthor',
                 ] * 3
                 assert result == expected
 
