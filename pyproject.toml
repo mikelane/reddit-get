@@ -19,7 +19,7 @@ include = [
 reddit-get = 'reddit_get.cli:main'
 
 [tool.poetry.dependencies]
-python = '>=3.9.0, <4.0.0'
+python = '>=3.11.0, <4.0.0'
 fire = ">=0.5,<0.8"
 praw = "^7.7.0"
 titlecase = "^2.4"
@@ -28,7 +28,7 @@ typing-extensions = "^4.6.0"
 
 [tool.poetry.group.lint.dependencies]
 black = ">=23.3,<26.0"
-isort = ">=5.12,<7.0"
+isort = ">=5.12,<8.0"
 mypy = "^1.3.0"
 pre-commit = ">=3.3.2,<5.0.0"
 ruff = ">=0.5.1,<0.14.5"
@@ -36,7 +36,7 @@ ruff = ">=0.5.1,<0.14.5"
 [tool.poetry.group.test.dependencies]
 attrs = "^25.3.0"
 pydantic = ">=1.10.8,<3.0.0"
-pytest = ">=7.3.1,<9.0.0"
+pytest = ">=7.3.1,<10.0.0"
 pytest-console-scripts = "^1.4.0"
 pytest-cov = ">=4,<8"
 pytest-mock = "^3.10.0"
@@ -71,7 +71,7 @@ log_auto_indent = true
 [tool.black]
 line-length = 110
 skip-string-normalization = true
-target-version = ['py311']
+target-version = ['py314']
 include = '.pyi?$'
 exclude = '''
 (
@@ -96,76 +96,9 @@ multi_line_output = 3
 force_grid_wrap = 2
 
 [tool.ruff]
-select = [
-    "A",
-    "ANN",
-    "ARG",
-    "B",
-    "BLE",
-    "C",
-    "C4",
-    "COM",
-    "D",
-    "DTZ",
-    "E",
-    "ERA",
-    "F",
-    "FBT",
-    "G",
-    "I",
-    "INP",
-    "N",
-    "PGH",
-    "PIE",
-    "PLE",
-    "PLR",
-    "PT",
-    "PTH",
-    "Q",
-    "RSE",
-    "RET",
-    "S",
-    "SIM",
-    "SLF",
-    "T20",
-    "TID",
-    "TCH",
-    "W",
-    "YTT"
-]
-ignore = [
-    "ANN101",  # TODO: Remove this once beartype supports the Self type.
-    "TCH001",  # Since we use beartype, our type checks happen at runtime, so we don't want htem in a type-checking block
-    "PLE1205",  # Loguru uses template strings, so this error is not applicable.
-]
-
-fixable = [
-    "A",
-    "ANN",
-    "B",
-    "C4",
-    "COM",
-    "D",
-    "E",
-    "F",
-    "G",
-    "I",
-    "PIE",
-    "PLR",
-    "PLW",
-    "PT",
-    "Q",
-    "RET",
-    "RSE",
-    "RUF",
-    "SIM",
-    "TCH",
-    "TID",
-    "TRY",
-    "W"
-]
-unfixable = []
-
+# Same as Black.
+line-length = 120
+target-version = "py314"
 fix = true
 
 exclude = [
@@ -189,33 +122,100 @@ exclude = [
     "node_modules",
     "venv",
 ]
-# Same as Black.
-line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "A",      # flake8-builtins
+    "ANN",    # flake8-annotations
+    "ARG",    # flake8-unused-arguments
+    "ASYNC",  # flake8-async
+    "B",      # flake8-bugbear
+    "BLE",    # flake8-blind-except
+    "C4",     # flake8-comprehensions
+    "C90",    # mccabe
+    "COM",    # flake8-commas
+    "D",      # pydocstyle
+    "DTZ",    # flake8-datetimez
+    "E",      # pycodestyle errors
+    "ERA",    # eradicate
+    "F",      # pyflakes
+    "FA",     # flake8-future-annotations
+    "FBT",    # flake8-boolean-trap
+    "FLY",    # flynt
+    "FURB",   # refurb
+    "G",      # flake8-logging-format
+    "I",      # isort
+    "ICN",    # flake8-import-conventions
+    "INP",    # flake8-no-pep420
+    "INT",    # flake8-gettext
+    "LOG",    # flake8-logging
+    "N",      # pep8-naming
+    "NPY",    # numpy-specific rules
+    "PD",     # pandas-vet
+    "PERF",   # perflint
+    "PGH",    # pygrep-hooks
+    "PIE",    # flake8-pie
+    "PL",     # pylint
+    "PT",     # flake8-pytest-style
+    "PTH",    # flake8-use-pathlib
+    "PYI",    # flake8-pyi
+    "Q",      # flake8-quotes
+    "RET",    # flake8-return
+    "RSE",    # flake8-raise
+    "RUF",    # ruff-specific rules
+    "S",      # flake8-bandit
+    "SIM",    # flake8-simplify
+    "SLF",    # flake8-self
+    "SLOT",   # flake8-slots
+    "T10",    # flake8-debugger
+    "T20",    # flake8-print
+    "TC",     # flake8-type-checking (was TCH)
+    "TID",    # flake8-tidy-imports
+    "TRY",    # tryceratops
+    "UP",     # pyupgrade
+    "W",      # pycodestyle warnings
+    "YTT",    # flake8-2020
+]
+
+ignore = [
+    "TC001",   # Type checking imports - we don't use TYPE_CHECKING blocks
+    "PLE1205", # Loguru uses template strings
+    "COM812",  # Conflicts with formatter
+    "ISC001",  # Conflicts with formatter
+]
+
+fixable = ["ALL"]
+unfixable = []
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
-target-version = "py311"
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401", "F403"]  # Module level import not at top, unused imports, star imports
+"tests/**/*.py" = ["ANN", "D", "S101", "ARG", "PT", "SLF"]  # Relax rules for tests
 
-[tool.ruff.per-file-ignores]
-"__init__.py" = ["E402"]
-"tests/**/*.py" = ["ANN201", "ANN001", "D100", "D103", "S101"]
-
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 inline-quotes = "single"
 multiline-quotes = "single"
 
-[tool.ruff.mccabe]
-# Unlike Flake8, default to a complexity level of 10.
+[tool.ruff.lint.mccabe]
 max-complexity = 10
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 required-imports = ["from __future__ import annotations"]
+force-single-line = false
+force-sort-within-sections = true
+known-first-party = ["reddit_get"]
 
-[tool.ruff.flake8-tidy-imports]
-# Disallow all relative imports.
-ban-relative-imports = "all"
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pylint]
+max-args = 10
+max-branches = 15
+max-returns = 6
+max-statements = 50
 
 [tool.mypy]
 plugins = ["pydantic.mypy"]

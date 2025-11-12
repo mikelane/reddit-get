@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 from typing import (
+    TYPE_CHECKING,
     Any,
     Dict,
-    Iterator,
     List,
     Optional,
 )
@@ -9,15 +11,18 @@ from typing import (
 try:
     from typing import Protocol
 except ImportError:  # pragma: no cover
-    from typing_extensions import Protocol  # type: ignore
+    from typing import Protocol  # type: ignore
 
 from .enums import *
 
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+
 
 class PrawQuery(Protocol):  # pragma: no cover
-    def __call__(self, limit: Optional[int]) -> Iterator[Any]:
+    def __call__(self, limit: int | None) -> Iterator[Any]:
         ...
 
 
-CallMap = Dict[SortingOption, PrawQuery]
-Posts = List[str]
+CallMap = dict[SortingOption, PrawQuery]
+Posts = list[str]

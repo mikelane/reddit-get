@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from enum import (
     Enum,
     EnumMeta,
@@ -5,7 +7,7 @@ from enum import (
 
 
 class MetaEnum(EnumMeta):
-    def __contains__(cls, item):
+    def __contains__(cls, item) -> bool:
         try:
             cls(item)
         except ValueError:
