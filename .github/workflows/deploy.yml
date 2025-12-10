@@ -46,7 +46,7 @@ jobs:
         run: poetry run pytest -vvv --cov=reddit_get --cov-fail-under=90 --cov-report=xml:docs/coverage/deployment/report.xml --numprocesses=auto --color=yes
 
       - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v5.5.1
+        uses: codecov/codecov-action@v5.5.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: codecov-umbrella

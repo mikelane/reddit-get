@@ -62,7 +62,7 @@ jobs:
         run: poetry run pytest -vvv --force-sugar --tb=native --cov=reddit_get --cov-fail-under=90 --cov-report=xml:docs/coverage/integration/report.xml --numprocesses=auto --color=yes --code-highlight=yes --durations=10
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5.5.1
+        uses: codecov/codecov-action@v5.5.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: codecov-umbrella
