@@ -1450,14 +1450,14 @@ completion = ["argcomplete (>=3.6.3)"]
 
 [[package]]
 name = "types-toml"
-version = "0.10.8.20260408"
+version = "0.10.8.20260508"
 description = "Typing stubs for toml"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 files = [
-    {file = "types_toml-0.10.8.20260408-py3-none-any.whl", hash = "sha256:e958d4c660385e548705a298f17dc162baf44c8b6d6aff79aeefe75f4f77ac87"},
-    {file = "types_toml-0.10.8.20260408.tar.gz", hash = "sha256:6b30b031235565a12febb1388900b129f1adeabfcfa594da46d0372b2ac107ad"},
+    {file = "types_toml-0.10.8.20260508-py3-none-any.whl", hash = "sha256:144d615419051493ab1e5e71b6477f7c56fadc78f0856407775e75c8e2916140"},
+    {file = "types_toml-0.10.8.20260508.tar.gz", hash = "sha256:93aaa72365bd9bc8c2ce1ca3502b0470d8d428376bada020e1a4956b8b82fdda"},
 ]
 
 [[package]]
