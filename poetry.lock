@@ -1167,14 +1167,14 @@ testing = ["filelock"]
 
 [[package]]
 name = "python-discovery"
-version = "1.2.2"
+version = "1.4.4"
 description = "Python interpreter discovery"
 optional = false
 python-versions = ">=3.8"
 groups = ["lint", "test"]
 files = [
-    {file = "python_discovery-1.2.2-py3-none-any.whl", hash = "sha256:e1ae95d9af875e78f15e19aed0c6137ab1bb49c200f21f5061786490c9585c7a"},
-    {file = "python_discovery-1.2.2.tar.gz", hash = "sha256:876e9c57139eb757cb5878cbdd9ae5379e5d96266c99ef731119e04fffe533bb"},
+    {file = "python_discovery-1.4.4-py3-none-any.whl", hash = "sha256:abebe9120b43453b68c908acfb1e72a19d1a959ed2cb620ad38fc57d08056dbe"},
+    {file = "python_discovery-1.4.4.tar.gz", hash = "sha256:5cad33982d412c1f3ffb8f9ca4ea292c9680bca3942451d30b69c37fce53a4a3"},
 ]
 
 [package.dependencies]
@@ -1182,7 +1182,7 @@ filelock = ">=3.15.4"
 platformdirs = ">=4.3.6,<5"
 
 [package.extras]
-docs = ["furo (>=2025.12.19)", "sphinx (>=9.1)", "sphinx-autodoc-typehints (>=3.6.3)", "sphinxcontrib-mermaid (>=2)"]
+docs = ["furo (>=2025.12.19)", "sphinx (>=9.1)", "sphinx-autodoc-typehints (>=3.6.3)", "sphinxcontrib-mermaid (>=2)", "sphinxcontrib-towncrier (>=0.4)", "towncrier (>=25.8)"]
 testing = ["covdefaults (>=2.3)", "coverage (>=7.5.4)", "pytest (>=8.3.5)", "pytest-mock (>=3.14)", "setuptools (>=75.1)"]
 
 [[package]]
@@ -1429,14 +1429,14 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.56.2"
+version = "4.56.4"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 files = [
-    {file = "tox-4.56.2-py3-none-any.whl", hash = "sha256:245b60f2610e126070b289a862d6288401a387147e86a30c9316cb0ab276137b"},
-    {file = "tox-4.56.2.tar.gz", hash = "sha256:346442f3982a5c1b792abcbc476a90f821031154251ea3506401c4c51c62cc2a"},
+    {file = "tox-4.56.4-py3-none-any.whl", hash = "sha256:53bac88382b9638a5ce40fbaddd6076e1c8f638751af7bf8e759392c953df2f0"},
+    {file = "tox-4.56.4.tar.gz", hash = "sha256:d49e371119ebfafb15054ad7ccff3d03027ccb65195fae3ac656b431b5524055"},
 ]
 
 [package.dependencies]
@@ -1447,7 +1447,7 @@ packaging = ">=26"
 platformdirs = ">=4.9.4"
 pluggy = ">=1.6"
 pyproject-api = ">=1.10"
-python-discovery = ">=1.2.2"
+python-discovery = ">=1.4.4"
 tomli-w = ">=1.2"
 virtualenv = ">=21.1"
 
