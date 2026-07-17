@@ -412,6 +412,18 @@ files = [
 toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
 
 [[package]]
+name = "defusedxml"
+version = "0.7.1"
+description = "XML bomb protection for Python stdlib modules"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+groups = ["main"]
+files = [
+    {file = "defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61"},
+    {file = "defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"},
+]
+
+[[package]]
 name = "distlib"
 version = "0.4.0"
 description = "Distribution utilities"
@@ -784,48 +796,36 @@ testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
 name = "praw"
-version = "7.8.2"
+version = "8.0.2"
 description = "Python Reddit API Wrapper."
 optional = false
-python-versions = "~=3.8"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "praw-7.8.2-py3-none-any.whl", hash = "sha256:ab0e2da4e1c03c6cfb3fdb91c1ddf3a42ecd09d6f09222ad5393ac89e8b97af5"},
-    {file = "praw-7.8.2.tar.gz", hash = "sha256:6230a2329e5c927ebbb45ebeb17d60761ace5ed65336a78fcfeab49937b9615b"},
+    {file = "praw-8.0.2-py3-none-any.whl", hash = "sha256:22a988bef07e2d840ab062ae25f760c5bfc6367b9ecaab69f71e7ff511d75564"},
+    {file = "praw-8.0.2.tar.gz", hash = "sha256:29bfe995f7f24017dd8eee36153085ad27de1740f13c7dcdb08df42a24a0dae2"},
 ]
 
 [package.dependencies]
-prawcore = ">=2.4,<3"
-update_checker = ">=0.18"
-websocket-client = ">=0.54.0"
-
-[package.extras]
-ci = ["coveralls"]
-dev = ["packaging", "praw[lint]", "praw[test]"]
-lint = ["praw[readthedocs]", "pre-commit", "ruff (>=0.0.291)"]
-readthedocs = ["furo", "sphinx"]
-test = ["betamax (>=0.8,<0.9)", "betamax-matchers (>=0.3.0,<0.5)", "pytest (>=2.7.3)", "requests (>=2.20.1,<3)", "urllib3 (==1.26.*)"]
+defusedxml = "0.7.1"
+prawcore = ">=4,<5"
+update-checker = ">=1.0,<2.0"
+websocket-client = ">=0.54.0,<2"
 
 [[package]]
 name = "prawcore"
-version = "2.4.0"
-description = "\"Low-level communication layer for PRAW 4+."
+version = "4.0.0"
+description = "Low-level communication layer for PRAW 4+."
 optional = false
-python-versions = "~=3.8"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "prawcore-2.4.0-py3-none-any.whl", hash = "sha256:29af5da58d85704b439ad3c820873ad541f4535e00bb98c66f0fbcc8c603065a"},
-    {file = "prawcore-2.4.0.tar.gz", hash = "sha256:b7b2b5a1d04406e086ab4e79988dc794df16059862f329f4c6a43ed09986c335"},
+    {file = "prawcore-4.0.0-py3-none-any.whl", hash = "sha256:53f91bcd4cb25a26ca58f3ba7c5bf83d9d93a74025aae2c926bc6b0d5fd11df7"},
+    {file = "prawcore-4.0.0.tar.gz", hash = "sha256:c7e4d6e1b71e2b9c88680aee467e3e07d22df4c91bb01488ce2a3ab43d76b076"},
 ]
 
 [package.dependencies]
-requests = ">=2.6.0,<3.0"
-
-[package.extras]
-ci = ["coveralls"]
-dev = ["packaging", "prawcore[lint]", "prawcore[test]"]
-lint = ["pre-commit", "ruff (>=0.0.291)"]
-test = ["betamax (>=0.8,<0.9)", "pytest (>=2.7.3)", "urllib3 (==1.26.*)"]
+requests = ">=2.34.2,<3.0"
 
 [[package]]
 name = "pre-commit"
@@ -1325,14 +1325,14 @@ files = [
 
 [[package]]
 name = "requests"
-version = "2.33.0"
+version = "2.34.2"
 description = "Python HTTP for Humans."
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "requests-2.33.0-py3-none-any.whl", hash = "sha256:3324635456fa185245e24865e810cecec7b4caf933d7eb133dcde67d48cee69b"},
-    {file = "requests-2.33.0.tar.gz", hash = "sha256:c7ebc5e8b0f21837386ad0e1c8fe8b829fa5f544d8df3b2253bff14ef29d7652"},
+    {file = "requests-2.34.2-py3-none-any.whl", hash = "sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"},
+    {file = "requests-2.34.2.tar.gz", hash = "sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"},
 ]
 
 [package.dependencies]
@@ -1343,7 +1343,6 @@ urllib3 = ">=1.26,<3"
 
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
-test = ["PySocks (>=1.5.6,!=1.5.7)", "pytest (>=3)", "pytest-cov", "pytest-httpbin (==2.1.0)", "pytest-mock", "pytest-xdist"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<8)"]
 
 [[package]]
@@ -1496,23 +1495,18 @@ typing-extensions = ">=4.12.0"
 
 [[package]]
 name = "update-checker"
-version = "0.18.0"
+version = "1.0.0"
 description = "A python module that will check for package updates."
 optional = false
-python-versions = "*"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "update_checker-0.18.0-py3-none-any.whl", hash = "sha256:cbba64760a36fe2640d80d85306e8fe82b6816659190993b7bdabadee4d4bbfd"},
-    {file = "update_checker-0.18.0.tar.gz", hash = "sha256:6a2d45bb4ac585884a6b03f9eade9161cedd9e8111545141e9aa9058932acb13"},
+    {file = "update_checker-1.0.0-py3-none-any.whl", hash = "sha256:5837640948ff21820ba3ea881fb4bed5abefb39037895c6447f5e712236d60c6"},
+    {file = "update_checker-1.0.0.tar.gz", hash = "sha256:bfcac66414572a82a98ea8c8633bf1ce5d102750e3b93469b89b30aa845cd1d7"},
 ]
 
-[package.dependencies]
-requests = ">=2.3.0"
-
 [package.extras]
-dev = ["black", "flake8", "pytest (>=2.7.3)"]
-lint = ["black", "flake8"]
-test = ["pytest (>=2.7.3)"]
+async = ["aiohttp"]
 
 [[package]]
 name = "urllib3"
@@ -1570,4 +1564,4 @@ test = ["pytest", "websockets"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11.0, <4.0.0"
-content-hash = "8f8895a4eddeb038bc2fc0784afa5e52d962839ea7ef9af9c6179b97e4bdfe26"
+content-hash = "4eaa677382f43cacd492ccf24c014401b936ca89b0ea039b788be6906245e7f1"
